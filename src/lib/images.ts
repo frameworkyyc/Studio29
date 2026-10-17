@@ -2,8 +2,8 @@
  * Image + logo registry. Drop files into src/assets/photos (or src/assets/logo)
  * and they are picked up by base name — no code changes needed.
  *   src/assets/photos/hero.jpg          -> <Photo name="hero" />
- *   src/assets/logo/logo.svg            -> dark logo (on ivory)
- *   src/assets/logo/logo-light.svg      -> light logo (on charcoal)
+ *   src/assets/logo/logo.png            -> dark wordmark (on ivory); logo-light.png for dark backgrounds
+ *   logo-lockup[-light].png (with tagline), mark[-light].png (S|29 roundel)
  * Missing files render a clearly labelled placeholder instead of breaking.
  */
 const photoModules = import.meta.glob('/src/assets/photos/*.{jpg,jpeg,png,webp,avif}', {
@@ -32,4 +32,5 @@ const logos = index(logoModules);
 
 export const photoUrl = (name: string): string | undefined => photos[name];
 export const hasPhoto = (name: string): boolean => name in photos;
-export const logoUrl = (variant: 'logo' | 'logo-light'): string | undefined => logos[variant] ?? (variant === 'logo-light' ? undefined : logos.logo);
+export type LogoName = 'logo' | 'logo-light' | 'logo-lockup' | 'logo-lockup-light' | 'mark' | 'mark-light';
+export const logoUrl = (name: LogoName): string | undefined => logos[name];

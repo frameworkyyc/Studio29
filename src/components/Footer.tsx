@@ -8,7 +8,7 @@ export default function Footer() {
     <footer className="on-dark bg-charcoal text-ivory">
       <div className="container-page grid gap-14 py-20 md:grid-cols-12 md:py-24">
         <div className="md:col-span-5">
-          <Logo variant="light" />
+          <Logo variant="light" form="lockup" />
           <p className="mt-6 max-w-sm font-serif text-2xl italic leading-snug text-ivory/80">{site.tagline}</p>
         </div>
         <nav aria-label="Footer" className="md:col-span-3 md:col-start-7">

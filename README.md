@@ -18,7 +18,7 @@ Drop files in and they appear automatically, with no code changes:
 | `intro.jpg`, `about.jpg`, `booking-cta.jpg` | Home intro, About, booking CTA |
 | `living-room-01/02/03`, `kitchen-01/02/03`, `dining-room-01/02`, `bathroom-01` | Rooms + gallery |
 
-- Logo: `src/assets/logo/logo.svg` (dark, for ivory) and `logo-light.svg` (for the charcoal footer). A wordmark is used until then.
+- Logos are installed in `src/assets/logo` (transparent PNGs: wordmark, lockup with tagline, S|29 roundel, each in dark and light). Replace with SVGs of the same names for crisper output.
 - Export WebP/JPG at most 2400px wide, ~300 KB each. Update alt text in `src/data/photos.ts` and `gallery.ts` to describe each photo.
 - Replace `public/og-default.png` (1200×630) with a photo-based share image if desired.
 
