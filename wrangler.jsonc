@@ -1,0 +1,15 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "studio29",
+  "main": "worker/index.ts",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    // Unknown paths return index.html so React Router handles client-side routes.
+    "not_found_handling": "single-page-application",
+    // Only /api/* hits the Worker; everything else is served straight from assets.
+    "run_worker_first": ["/api/*"]
+  },
+  "observability": { "enabled": true }
+}

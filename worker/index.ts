@@ -1,16 +1,20 @@
 /**
- * Cloudflare Pages Function: POST /api/inquiry
+ * Studio 29 Worker.
  *
- * Validates a booking/contact submission and forwards it as JSON to
- * INQUIRY_WEBHOOK_URL (Zapier, Make, n8n, a Slack/Discord webhook, an email
- * API relay, etc). If that secret is not set it returns 503, which the site
- * treats as "not connected" — it never reports a false success.
+ * Static site assets (./dist) are served by Cloudflare automatically with SPA
+ * fallback (see wrangler.jsonc). This Worker only runs for /api/* requests.
  *
- * Set in Cloudflare Pages > Settings > Variables and Secrets:
+ * POST /api/inquiry validates a booking/contact submission and forwards it as
+ * JSON to INQUIRY_WEBHOOK_URL (Zapier, Make, n8n, an email-API relay, etc.).
+ * If that secret is not set it returns 503, which the site treats as
+ * "not connected" — it never reports a false success.
+ *
+ * Worker settings (Dashboard > Workers & Pages > studio29 > Settings):
  *   INQUIRY_WEBHOOK_URL   (secret)
  *   ALLOWED_ORIGIN        (optional, e.g. https://studio29.ca)
  */
 interface Env {
+  ASSETS: Fetcher;
   INQUIRY_WEBHOOK_URL?: string;
   ALLOWED_ORIGIN?: string;
 }
@@ -19,7 +23,8 @@ const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 const json = (body: unknown, status = 200) =>
   new Response(JSON.stringify(body), { status, headers: { 'Content-Type': 'application/json' } });
 
-export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
+async function handleInquiry(request: Request, env: Env): Promise<Response> {
+  if (request.method !== 'POST') return json({ error: 'method_not_allowed' }, 405);
   if (!env.INQUIRY_WEBHOOK_URL) return json({ error: 'not_configured' }, 503);
 
   const origin = request.headers.get('Origin');
@@ -46,4 +51,13 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
     body: JSON.stringify({ ...data, receivedAt: new Date().toISOString(), source: 'studio29-website' }),
   });
   return upstream.ok ? json({ ok: true }) : json({ error: 'upstream_failed' }, 502);
-};
+}
+
+export default {
+  async fetch(request: Request, env: Env): Promise<Response> {
+    const { pathname } = new URL(request.url);
+    if (pathname === '/api/inquiry') return handleInquiry(request, env);
+    if (pathname.startsWith('/api/')) return json({ error: 'not_found' }, 404);
+    return env.ASSETS.fetch(request);
+  },
+} satisfies ExportedHandler<Env>;

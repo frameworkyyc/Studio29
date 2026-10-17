@@ -1,11 +1,13 @@
 # Studio 29 — website
 
-React + TypeScript + Tailwind (Vite). Static SPA, deploys to Cloudflare Pages.
+React + TypeScript + Tailwind (Vite). Static SPA served by a Cloudflare Worker (static assets), deployed with Wrangler.
 
 ```bash
 npm install
 npm run dev      # local
 npm run build    # typecheck + build + sitemap/robots (set SITE_URL=https://your-domain)
+npm run cf:preview  # run the built site + API locally in the Workers runtime
+npm run deploy   # build + wrangler deploy (manual deploy)
 ```
 
 ## 1. Add your photos and logo (needed before launch)
@@ -30,10 +32,18 @@ Drop files in and they appear automatically, with no code changes:
 
 ## 3. Connect the forms
 Forms never claim delivery without a real backend. Without one they show "Not sent" and offer copy-to-clipboard plus Instagram.
-To go live on Cloudflare Pages, set secret `INQUIRY_WEBHOOK_URL` (Zapier/Make/n8n/email relay) and build var `VITE_INQUIRY_ENDPOINT=/api/inquiry` (see `.env.example`, `functions/api/inquiry.ts`).
+To go live, set Worker secret `INQUIRY_WEBHOOK_URL` (Zapier/Make/n8n/email relay) and build variable `VITE_INQUIRY_ENDPOINT=/api/inquiry` (see `.env.example`, `worker/index.ts`).
 
 ## Booking architecture
 Pages talk to `BookingProvider` (`src/lib/booking/types.ts`); today it is inquiry-only. Calendar, payments/deposits, confirmations, accounts and discount codes plug in behind that interface.
 
-## Deploy (Cloudflare Pages)
-Build command `npm run build`, output `dist`, env `SITE_URL` + `VITE_SITE_URL`. SPA routing via `public/_redirects`.
+## Deploy (Cloudflare Workers Builds)
+Config lives in `wrangler.jsonc` (static assets from `dist`, SPA fallback, Worker runs only for `/api/*`).
+Dashboard > Workers & Pages > studio29 > Settings > Build:
+- **Build command:** `npm run build`
+- **Deploy command:** `npx wrangler deploy`
+- **Non-production branch deploy command:** `npx wrangler versions upload`
+- **Root directory:** `/`
+- **Build variables:** `SITE_URL` and `VITE_SITE_URL` = your production URL (e.g. `https://studio29.ca`); optional `VITE_INQUIRY_ENDPOINT=/api/inquiry`
+- The Worker name in the dashboard must match `name` in `wrangler.jsonc` (`studio29`).
+Do **not** use `wrangler preview`.
