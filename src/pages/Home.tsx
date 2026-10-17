@@ -20,7 +20,7 @@ export default function Home() {
       {/* Hero */}
       <section className="relative mt-20 h-[calc(100svh-5rem)] min-h-[34rem] overflow-hidden bg-charcoal md:mt-24 md:h-[calc(100svh-6rem)]">
         <div className="kenburns absolute inset-0">
-          <Photo {...slots.hero} aspect="h-full" priority tone="dark" sizes="100vw" className="!h-full" />
+          <Photo {...slots.hero} aspect="h-full" priority tone="dark" sizes="100vw" className="!h-full" imgClassName="object-[50%_62%]" />
         </div>
         <div className="absolute inset-0 bg-charcoal/30" aria-hidden="true" />
         <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-charcoal/70 to-transparent" aria-hidden="true" />

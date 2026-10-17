@@ -30,8 +30,8 @@ export const spaces: Space[] = [
     highlights: ['Fully furnished', 'Warm, neutral palette', 'Curated decor'],
     photo: slots.livingRoom,
     gallery: [
-      { name: 'living-room-02', alt: 'Living room seating area at Studio 29' },
-      { name: 'living-room-03', alt: 'Living room decor detail at Studio 29' },
+      { name: 'living-room-02', alt: 'Ladder shelf styled with books, plants and a bronze duck beside the living room TV' },
+      { name: 'entry-01', alt: 'Entryway console with a snake plant, stacked books and a brass bowl beneath an abstract painting' },
     ],
   },
   {
@@ -59,7 +59,7 @@ export const spaces: Space[] = [
       'A furnished dining room that offers a different mood from the living spaces. Use it for styled table scenes, group portraits, or simply as another distinct location within the same booking.',
     highlights: ['Furnished', 'Group-friendly', 'A distinct second setting'],
     photo: slots.diningRoom,
-    gallery: [{ name: 'dining-room-02', alt: 'Dining room at Studio 29' }],
+    gallery: [],
   },
   {
     id: 'amenities',

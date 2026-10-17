@@ -29,14 +29,13 @@ export interface GalleryImage {
 }
 
 export const galleryImages: GalleryImage[] = [
-  { id: 'i-01', file: 'living-room-01', alt: 'Living room at Studio 29', category: 'interiors', orientation: 'landscape', approved: true },
-  { id: 'i-02', file: 'kitchen-01', alt: 'Kitchen with large island', category: 'interiors', orientation: 'portrait', approved: true },
-  { id: 'i-03', file: 'dining-room-01', alt: 'Dining room at Studio 29', category: 'interiors', orientation: 'landscape', approved: true },
-  { id: 'i-04', file: 'living-room-02', alt: 'Living room seating area', category: 'interiors', orientation: 'portrait', approved: true },
-  { id: 'i-05', file: 'kitchen-02', alt: 'Kitchen island detail', category: 'interiors', orientation: 'square', approved: true },
-  { id: 'i-06', file: 'living-room-03', alt: 'Living room decor detail', category: 'interiors', orientation: 'portrait', approved: true },
-  { id: 'i-07', file: 'dining-room-02', alt: 'Dining room table setting', category: 'interiors', orientation: 'landscape', approved: true },
-  { id: 'i-08', file: 'kitchen-03', alt: 'Kitchen detail', category: 'interiors', orientation: 'square', approved: true },
+  { id: 'i-01', file: 'living-room-01', alt: 'Living room with a leather sofa, wood coffee table and wall-mounted TV', category: 'interiors', orientation: 'portrait', approved: true },
+  { id: 'i-02', file: 'dining-room-01', alt: 'Dining room with a dark table, grey chairs and a pendant light', category: 'interiors', orientation: 'square', approved: true },
+  { id: 'i-03', file: 'living-room-02', alt: 'Ladder shelf styled with books, plants and a bronze duck', category: 'interiors', orientation: 'portrait', approved: true },
+  { id: 'i-04', file: 'entry-01', alt: 'Entryway console beneath an abstract painting', category: 'interiors', orientation: 'portrait', approved: true },
+  // Kitchen photos: add kitchen-01.webp etc. to src/assets/photos, then uncomment.
+  // { id: 'i-05', file: 'kitchen-01', alt: 'Kitchen with a large island', category: 'interiors', orientation: 'landscape', approved: true },
+  // Also supplied but intentionally not published (rooms not currently offered): office-01, bedroom-01.
   // Guest photographer example (hidden until the file exists, approval is given and a credit is set):
   // { id: 'g-01', file: 'guest-portrait-01', alt: 'Portrait in the living room', category: 'portrait',
   //   orientation: 'portrait', approved: true, credit: 'Photographer Name', creditUrl: 'https://instagram.com/…' },
