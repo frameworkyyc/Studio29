@@ -2,6 +2,9 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "studio29",
   "main": "worker/index.ts",
+  // Wrangler runs this before reading assets.directory, so `wrangler deploy` works from a clean
+  // clone even if the Cloudflare "Build command" field is empty (dist/ is not committed).
+  "build": { "command": "npm run build" },
   "compatibility_date": "2026-10-01",
   "assets": {
     "directory": "./dist",

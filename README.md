@@ -38,13 +38,15 @@ To go live, set Worker secret `INQUIRY_WEBHOOK_URL` (Zapier/Make/n8n/email relay
 Pages talk to `BookingProvider` (`src/lib/booking/types.ts`); today it is inquiry-only. Calendar, payments/deposits, confirmations, accounts and discount codes plug in behind that interface.
 
 ## Deploy (Cloudflare Workers Builds)
-Config lives in `wrangler.jsonc` (static assets from `dist`, SPA fallback, Worker runs only for `/api/*`).
+`dist/` is generated and NOT committed, so every Cloudflare build must run `npm run build` first. Config lives in `wrangler.jsonc` (static assets from `dist`, SPA fallback, Worker only for `/api/*`).
+
+Branches: `main` = production (approved code only), `staging` = development/preview. Work on `staging`, test, then merge to `main` after approval.
+
 Dashboard > Workers & Pages > studio29 > Settings > Build:
+- **Production branch:** `main`
 - **Build command:** `npm run build`
-- **Deploy command:** `npx wrangler deploy`
-- **Non-production branch deploy command:** `npx wrangler versions upload`
+- **Deploy command (production):** `npx wrangler deploy`
+- **Non-production branch deploy command (staging):** `npm run deploy:preview` (= build + `wrangler preview`) or `npx wrangler preview` once Build command is set. Fallback if Worker Previews isn't available on the account: `npx wrangler versions upload`.
 - **Root directory:** `/`
-- **Build variables:** `SITE_URL` and `VITE_SITE_URL` = your production URL (e.g. `https://studio29.ca`); optional `VITE_INQUIRY_ENDPOINT=/api/inquiry`
-- The Worker name in the dashboard must match `name` in `wrangler.jsonc` (`studio29`).
-- **Preview deploy command** (runs for every non-production branch): `npx wrangler versions upload`, or `npx wrangler preview` (open beta; needs the `previews` block already in `wrangler.jsonc`).
-- Cloudflare runs the Production deploy command only for builds of the production branch (Settings > Build > Branch control). Builds of any other branch run the Preview command.
+- **Variables:** `SITE_URL`, `VITE_SITE_URL` (and optional `VITE_INQUIRY_ENDPOINT=/api/inquiry`)
+`wrangler deploy` also runs the build itself (`build.command`) as a safety net.

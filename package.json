@@ -8,7 +8,8 @@
     "build": "tsc --noEmit && vite build && node scripts/postbuild.mjs",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit && tsc --noEmit -p worker",
-    "deploy": "npm run build && wrangler deploy",
+    "deploy": "wrangler deploy",
+    "deploy:preview": "npm run build && wrangler preview",
     "cf:preview": "wrangler dev"
   },
   "dependencies": {
