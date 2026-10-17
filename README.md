@@ -46,4 +46,5 @@ Dashboard > Workers & Pages > studio29 > Settings > Build:
 - **Root directory:** `/`
 - **Build variables:** `SITE_URL` and `VITE_SITE_URL` = your production URL (e.g. `https://studio29.ca`); optional `VITE_INQUIRY_ENDPOINT=/api/inquiry`
 - The Worker name in the dashboard must match `name` in `wrangler.jsonc` (`studio29`).
-Do **not** use `wrangler preview`.
+- **Preview deploy command** (runs for every non-production branch): `npx wrangler versions upload`, or `npx wrangler preview` (open beta; needs the `previews` block already in `wrangler.jsonc`).
+- Cloudflare runs the Production deploy command only for builds of the production branch (Settings > Build > Branch control). Builds of any other branch run the Preview command.

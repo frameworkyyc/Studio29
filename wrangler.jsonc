@@ -11,5 +11,6 @@
     // Only /api/* hits the Worker; everything else is served straight from assets.
     "run_worker_first": ["/api/*"]
   },
-  "observability": { "enabled": true }
+  "observability": { "enabled": true },
+  "previews": {}
 }
