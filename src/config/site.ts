@@ -18,6 +18,7 @@ export const site = {
   phone: null as string | null,
   /** Optional backend for the forms (JSON POST). Empty = forms report honestly that sending is not connected. */
   inquiryEndpoint: (import.meta.env.VITE_INQUIRY_ENDPOINT as string | undefined) ?? '',
+  credit: { name: 'Framework', url: 'https://frameworkco.ca' },
   ogImage: '/og-default.png',
 } as const;
 

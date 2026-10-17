@@ -35,7 +35,14 @@ export default function Footer() {
       <div className="border-t border-ivory/10">
         <div className="container-page flex flex-col gap-2 py-6 text-xs text-ivory/60 md:flex-row md:justify-between">
           <p>© {new Date().getFullYear()} {site.name}. All rights reserved.</p>
-          <p>Photography &amp; content studio rental · Calgary, Alberta</p>
+          <p>
+            Photography &amp; content studio rental · Calgary, Alberta
+            <span aria-hidden="true" className="hidden sm:inline"> · </span>
+            <span className="block sm:inline">
+              Created by{' '}
+              <a href={site.credit.url} target="_blank" rel="noopener noreferrer" className="link-u text-ivory/85">{site.credit.name}</a>
+            </span>
+          </p>
         </div>
       </div>
     </footer>
